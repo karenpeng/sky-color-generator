@@ -29,6 +29,7 @@ skyColor.set(1440, [160, 222, 255, 1]);
 
 ##### query color with given time
 ```js
+//get back a rgba color string with a given time
 //put this in an animation loop and you will get nice gradient effect :)
 color = skyColor.get(h * 60 + m)
 ```
