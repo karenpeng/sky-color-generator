@@ -1,6 +1,6 @@
 {
   "name": "sky-color-generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "given a time with 24 hours generate a color of the sky",
   "main": "index.js",
   "scripts": {

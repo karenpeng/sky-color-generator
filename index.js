@@ -24,7 +24,7 @@ SkyColor.prototype.set = function(time, color){
   var minutes, c
 
   if(typeof time === 'number' && time >= 0 && time <= 1440){
-    minutes = Math.floor(time)
+    minutes = time
   }
 
   else if(typeof time === 'string'){
@@ -41,24 +41,17 @@ SkyColor.prototype.set = function(time, color){
   }
 
   if(Array.isArray(color)){
-    c = [color[0], color[1], color[2], color[3] || 1]
+    c = color
   }else{
     throw new Error('sky-color-generator: sorry color only supports rgba array now :(')
     return
   }
 
-  var start = 0
-  var end = this.steps.length - 1
-  while(start < end){
-    var mid = Math.floor((start + end) / 2)
-    var m = this.steps[mid]['time']
-    if(m === minutes){
-      this.steps[mid]['color'] = c
-      return
-    }else if(m < minutes){
-      start = mid + 1
-    }else{
-      end = mid - 1
+  for(var i = 0; i < this.steps.length; i++){
+    var _obj = this.steps[i];
+    if(_obj['time'] === minutes){
+      _obj['color'] = c;
+      return;
     }
   }
 
@@ -78,7 +71,7 @@ SkyColor.prototype.get = function(time){
   var minutes;
 
   if(typeof time === 'number' && time >= 0 && time <= 1440){
-    minutes = Math.floor(time)
+    minutes = time
   }
 
   else if(typeof time === 'string'){
@@ -144,59 +137,59 @@ function searchRange(_start, _end, arr, target){
   var start = _start;
   var end = _end;
 
-  for(var i = 0; i < arr.length; i++){
-    if(arr[i]['time'] === target) return [i, i]
-    if(arr[i]['time'] > target){
-      rightBound = i;
-      break;
-    }
-  }
-
-  for(var i = arr.length-1; i >= 0; i--){
-    if(arr[i]['time'] === target) return [i, i]
-    if(arr[i]['time'] < target){
-      leftBound = i;
-      break;
-    }
-  }
-  return [leftBound, rightBound];
-
-  // while(start + 1 < end){
-  //   var mid = Math.floor((start + end) / 2);
-  //   var h = arr[mid]['time'];
-
-  //   if(h === target) return [mid, mid];
-  //   else if(h < target) start = mid;
-  //   else end = mid - 1;
+  // for(var i = 0; i < arr.length; i++){
+  //   if(arr[i]['time'] === target) return [i, i]
+  //   if(arr[i]['time'] > target){
+  //     rightBound = i;
+  //     break;
+  //   }
   // }
 
-  // var h1 = arr[start]['time'];
-  // var h2 = arr[end]['time'];
-  // if(h1 === target) return [start, start];
-  // else if(h2 === target) return [end, end];
-  // else if(h2 < target) leftBound = end;
-  // else if(h1 < target) leftBound = start;
-  // else leftBound = start - 1;
-
-  // start = leftBound;
-  // end = _end;
-  // while(start + 1 < end){
-  //   mid = Math.floor((start + end) / 2);
-  //   h = arr[mid]['time'];
-
-  //   if(h === target) return [mid, mid];
-  //   else if(h > target) end = mid;
-  //   else start = mid + 1;
+  // for(var i = arr.length-1; i >= 0; i--){
+  //   if(arr[i]['time'] === target) return [i, i]
+  //   if(arr[i]['time'] < target){
+  //     leftBound = i;
+  //     break;
+  //   }
   // }
-  // var h1 = arr[start]['time'];
-  // var h2 = arr[end]['time'];
-  // if(h1 === target) return [start, start];
-  // else if(h2 === target) return [end, end];
-  // else if(h1 > target) rightBound = start;
-  // else if(h2 > target) rightBound = end;
-  // else rightBound = end + 1; 
-
   // return [leftBound, rightBound];
+
+  while(start + 1 < end){
+    var mid = Math.floor((start + end) / 2);
+    var h = arr[mid]['time'];
+
+    if(h === target) return [mid, mid];
+    else if(h < target) start = mid;
+    else end = mid - 1;
+  }
+
+  var h1 = arr[start]['time'];
+  var h2 = arr[end]['time'];
+  if(h1 === target) return [start, start];
+  else if(h2 === target) return [end, end];
+  else if(h2 < target) leftBound = end;
+  else if(h1 < target) leftBound = start;
+  else leftBound = start - 1;
+
+  start = leftBound;
+  end = _end;
+  while(start + 1 < end){
+    mid = Math.floor((start + end) / 2);
+    h = arr[mid]['time'];
+
+    if(h === target) return [mid, mid];
+    else if(h > target) end = mid;
+    else start = mid + 1;
+  }
+  var h1 = arr[start]['time'];
+  var h2 = arr[end]['time'];
+  if(h1 === target) return [start, start];
+  else if(h2 === target) return [end, end];
+  else if(h1 > target) rightBound = start;
+  else if(h2 > target) rightBound = end;
+  else rightBound = end + 1; 
+
+  return [leftBound, rightBound];
 }
 
 
