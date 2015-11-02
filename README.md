@@ -39,6 +39,6 @@ color = skyColor.get(h * 60 + m)
 skyColor.startDay()
 ```
 
-##### check out the example this still doesn't make sense
+##### check out the example if this still doesn't make sense
 
-:sumglasses:
+:sunglasses:
