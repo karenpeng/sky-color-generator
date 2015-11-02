@@ -38,3 +38,7 @@ color = skyColor.get(h * 60 + m)
 //when a new day comes, please reset the color generator
 skyColor.startDay()
 ```
+
+##### check out the example this still doesn't make sense
+
+:sumglasses:
