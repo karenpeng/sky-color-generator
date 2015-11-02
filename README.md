@@ -41,4 +41,4 @@ skyColor.startDay()
 
 ##### check out the example this still doesn't make sense
 
-:sumglasses:
+:sunglasses:
