@@ -5,7 +5,6 @@ var SkyColor = require('./../index')
 var skyColor = new SkyColor()
 
 function init(){
-  //set accepts a 
   skyColor.set(0, [160, 222, 255, 1]);
   skyColor.set(360, [112, 189, 245, 1]);
   skyColor.set(420, [96, 168, 232, 0.5]);
