@@ -10,6 +10,8 @@ You could set color for certain time points, and get back a color with any given
 ##### initianize the color generator
 
 ```js
+var SkyColor = require('sky-color-generator')
+
 var skyColor = new SkyColor()
 skyColor.init(h * 60 + m)
 ```
